@@ -1,0 +1,512 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+// Funciones prototipo
+void mostrarMenuPrincipal();
+void historiaFosa(int &vida);
+void historiaBosque(int &vida);
+void historiaEnfrentamientoDragon(int &vida);
+void rescatarPrincesa();
+void historiaDesafioFinal();
+void tienda(int &monedas, int &pociones);
+
+int main() {
+    int vida = 100;
+    int monedas = 10; // Nueva variable para monedas
+    int pociones = 0; // Nueva variable para pociones
+
+
+
+    // Bienvenida decorada
+    cout << "**************************************************" << endl;
+    cout << "*                                                *" << endl;
+    cout << "*          Bienvenido a la aventura del          *" << endl;
+    cout << "*            Castillo. ¡Buena suerte!            *" << endl;
+    cout << "*                                                *" << endl;
+    cout << "**************************************************" << endl;
+
+    while (true) {
+        mostrarMenuPrincipal();
+
+        int opcion;
+        cout << "Elige una opción (1-6): ";
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1:
+                historiaFosa(vida);
+                break;
+
+            case 2:
+                historiaBosque(vida);
+                break;
+
+            case 3:
+                historiaEnfrentamientoDragon(vida);
+                rescatarPrincesa();
+                break;
+
+            case 4:
+                historiaDesafioFinal();  // Nuevo evento después de rescatar a la princesa
+                return 0;
+
+            case 5:
+                cout << "Estado actual: Vida = " << vida << endl;
+                tienda(monedas, pociones);
+                break;
+
+            case 6:
+                cout << "Gracias por jugar. Fin de la historia." << endl;
+                return 0;
+
+            default:
+                cout << "Opción no válida. Por favor, elige una opción del 1 al 6." << endl;
+                break;
+        }
+    }
+
+    // En este punto, el programa nunca llegará, pero el return 0 estaba fuera de lugar en tu código original.
+    return 0;
+}
+
+void mostrarMenuPrincipal() {
+    cout << "\n--- Menú Principal ---" << endl;
+    cout << "1. Capitulo 1" << endl;
+    cout << "2. Capitulo 2" << endl;
+    cout << "3. Capitulo 3" << endl;
+    cout << "4. Capitulo 4" << endl;
+    cout << "5. Ver barra de vida, dinero y pociones" << endl;
+    cout << "6. Salir del juego" << endl;
+}
+void tienda(int &monedas, int &pociones) {
+    cout << "\n--- Tienda ---" << endl;
+    cout << "Tienes " << monedas << " monedas de oro." << endl;
+    cout << "1. Comprar poción de salud (20 puntos de vida) por 15 monedas de oro." << endl;
+    cout << "2. Comprar espada mejorada (+10 de ataque) por 25 monedas de oro." << endl;
+    cout << "3. Volver al menú principal" << endl;
+
+    int opcionTienda;
+    cout << "Elige una opción (1-3): ";
+    cin >> opcionTienda;
+
+    switch (opcionTienda) {
+        case 1:
+            if (monedas >= 15) {
+                pociones++;
+                monedas -= 15;
+                cout << "Has comprado una poción de salud. Pociones actuales: " << pociones << endl;
+            } else {
+                cout << "No tienes suficientes monedas para comprar la poción." << endl;
+            }
+            break;
+
+        case 2:
+            if (monedas >= 25) {
+                // Puedes agregar lógica para mejorar el equipo del jugador
+                monedas -= 25;
+                cout << "Has comprado una espada mejorada. ¡Tu poder de ataque ha aumentado!" << endl;
+            } else {
+                cout << "No tienes suficientes monedas para comprar la espada mejorada." << endl;
+            }
+            break;
+
+        case 3:
+            cout << "Volviendo al menú principal." << endl;
+            break;
+
+        default:
+            cout << "Opción no válida. Volviendo al menú principal." << endl;
+    }
+}
+
+void historiaFosa(int &vida) {
+    cout << "Fanny es una joven princesa del reino de los recuerdos." << endl;
+    cout << "El rey ordena al valiente caballero protagonista encontrar y rescatar a Fanny, es secuestrada por un dragón llamado Thord." << endl;
+    cout << "¿Qué harás primero?" << endl;
+    cout << "1. Entrar en la fosa" << endl;
+    cout << "2. Buscar la puerta secreta" << endl;
+    cout << "3. Forzar la puerta principal" << endl;
+
+    int decision1;
+    cout << "Elige una opción (1-3): ";
+    cin >> decision1;
+
+    if (decision1 == 3) {
+        vida += 10;
+        cout << "Has ganado 10 puntos de vida. Vida actual: " << vida << endl;
+    } else if (decision1 == 2) {
+        // No pasa nada, simplemente continúa la historia.
+    } else {
+        // Regresar al menú principal
+        return;
+    }
+
+    // Punto de la historia: Elegir camino
+    cout << "Has entrado en la fosa. Encuentras tres caminos oscuros. Escoge sabiamente." << endl;
+    cout << "1. Camino de las Sombras" << endl;
+    cout << "2. Camino de la Oscuridad" << endl;
+    cout << "3. Camino de la Desesperación" << endl;
+
+    int decision2;
+    cout << "Elige una opción (1-3): ";
+    cin >> decision2;
+
+    // Agrega eventos según la elección del camino
+    switch (decision2) {
+        case 1:
+            cout << "Has elegido el Camino de las Sombras. Encuentras una daga afilada." << endl;
+            cout << "Mientras exploras, te encuentras con un mercader que ofrece objetos mágicos." << endl;
+            cout << "1. Comprar poción de salud (20 puntos de vida) por 15 monedas de oro." << endl;
+            cout << "2. Comprar anillo de resistencia (+5 de defensa) por 10 monedas de oro." << endl;
+            cout << "3. Ignorar al mercader y continuar tu camino." << endl;
+
+            int decisionMercader;
+            cout << "Elige una opción (1-3): ";
+            cin >> decisionMercader;
+
+            switch (decisionMercader) {
+                case 1:
+                    vida += 20;
+                    cout << "Has comprado la poción de salud. Vida actual: " << vida << endl;
+                    break;
+                case 2:
+                    cout << "Has comprado el anillo de resistencia. Defensa aumentada." << endl;
+                    // Aumentar la defensa del jugador
+                    break;
+                case 3:
+                    cout << "Ignoras al mercader y continúas tu camino." << endl;
+                    break;
+                default:
+                    cout << "Elección no válida. Continúas tu camino." << endl;
+            }
+            break;
+
+        case 2:
+            cout << "Has elegido el Camino de la Oscuridad. Encuentras una espada brillante." << endl;
+            cout << "Encuentras un mapa que revela la ubicación secreta de un tesoro escondido." << endl;
+            cout << "1. Ir en busca del tesoro" << endl;
+            cout << "2. Ignorar el mapa y continuar tu búsqueda de la princesa" << endl;
+
+            int decisionTesoro;
+            cout << "Elige una opción (1-2): ";
+            cin >> decisionTesoro;
+
+            switch (decisionTesoro) {
+                case 1:
+                    cout << "Descubres el tesoro y obtienes monedas de oro y una gema preciosa." << endl;
+                    // Puedes agregar más eventos aquí
+                    break;
+                case 2:
+                    cout << "Ignoras el mapa y continúas tu búsqueda de la princesa." << endl;
+                    // Puedes agregar más eventos aquí
+                    break;
+                default:
+                    cout << "Elección no válida. Continúas tu búsqueda de la princesa." << endl;
+                    // Puedes agregar más eventos aquí
+            }
+            break;
+
+        case 3:
+            cout << "Has elegido el Camino de la Desesperación. Encuentras un arco con flechas." << endl;
+            cout << "Te encuentras con un misterioso hechicero que te ofrece un trato." << endl;
+            cout << "1. Aceptar el trato y obtener poderes mágicos" << endl;
+            cout << "2. Rechazar la oferta y continuar tu camino" << endl;
+
+            int decisionHechicero;
+            cout << "Elige una opción (1-2): ";
+            cin >> decisionHechicero;
+
+            switch (decisionHechicero) {
+                case 1:
+                    cout << "Aceptas el trato y obtienes poderes mágicos. Tu arco ahora dispara flechas mágicas." << endl;
+                    // Puedes agregar más eventos aquí
+                    break;
+                case 2:
+                    cout << "Rechazas la oferta del hechicero y continúas tu camino." << endl;
+                    // Puedes agregar más eventos aquí
+                    break;
+                default:
+                    cout << "Elección no válida. Continúas tu camino sin el trato del hechicero." << endl;
+                    // Puedes agregar más eventos aquí
+            }
+            break;
+
+        default:
+            cout << "Elección no válida. Volviendo al menú principal." << endl;
+            return;
+    }
+
+    // Continuación de la historia
+    cout << "Mientras avanzas por el camino, te encuentras con un grupo de ladrones que intentan robarte." << endl;
+    cout << "¿Qué harás?" << endl;
+    cout << "1. Luchar contra los ladrones" << endl;
+    cout << "2. Ofrecerles parte de tus pertenencias para evitar la lucha" << endl;
+    cout << "3. Intentar huir de la situación" << endl;
+
+    int decisionLadrones;
+    cout << "Elige una opción (1-3): ";
+    cin >> decisionLadrones;
+
+    switch (decisionLadrones) {
+        case 1:
+            // Agrega un enfrentamiento con los ladrones aquí
+            cout << "Te enfrentas a los ladrones. ¡Prepárate para la batalla!" << endl;
+            // Puedes agregar más eventos aquí
+            break;
+        case 2:
+            cout << "Decides ofrecerles parte de tus pertenencias. Los ladrones aceptan y te dejan continuar." << endl;
+            break;
+        case 3:
+            cout << "Intentas huir de la situación, pero los ladrones te persiguen. Pierdes algunos puntos de vida en la escape." << endl;
+            vida -= 15;
+            cout << "Vida actual: " << vida << endl;
+            break;
+        default:
+            cout << "Elección no válida. Te enfrentas a los ladrones." << endl;
+            // Agrega un enfrentamiento con los ladrones aquí
+            cout << "Te enfrentas a los ladrones. ¡Prepárate para la batalla!" << endl;
+    }
+cout << "Continuando por la fosa, encuentras una criatura acuática misteriosa." << endl;
+    cout << "¿Qué harás?" << endl;
+    cout << "1. Intentar comunicarte con la criatura" << endl;
+    cout << "2. Atacar a la criatura por precaución" << endl;
+    cout << "3. Ignorar la criatura y seguir adelante" << endl;
+
+    int decisionCriaturaAcuatica;
+    cout << "Elige una opción (1-3): ";
+    cin >> decisionCriaturaAcuatica;
+
+    switch (decisionCriaturaAcuatica) {
+        case 1:
+            cout << "Logras comunicarte con la criatura acuática. Te ofrece una ayuda especial en el próximo desafío acuático." << endl;
+            // Puedes agregar más eventos aquí
+            break;
+        case 2:
+            cout << "Atacas a la criatura acuática, pero resulta ser amigable. Pierdes 10 puntos de vida por tu acción impulsiva." << endl;
+            vida -= 10;
+            cout << "Vida actual: " << vida << endl;
+            break;
+        case 3:
+            cout << "Ignoras a la criatura acuática y continúas tu camino." << endl;
+            break;
+        default:
+            cout << "Elección no válida. La criatura acuática te observa con curiosidad." << endl;
+    }
+}
+    
+void historiaBosque(int &vida) {
+    cout << "Te aventuras en el misterioso bosque cercano al castillo." << endl;
+    cout << "Encuentras tres caminos diferentes. ¿Cuál eliges?" << endl;
+    cout << "1. Sendero iluminado por luciérnagas" << endl;
+    cout << "2. Camino cubierto de niebla densa" << endl;
+    cout << "3. Atajo a través de la espesura" << endl;
+
+    int decisionBosque;
+    cout << "Elige una opción (1-3): ";
+    cin >> decisionBosque;
+
+    switch (decisionBosque) {
+        case 1:
+            cout << "Sigues el sendero iluminado por luciérnagas. Te sientes reconfortado por su luz." << endl;
+            cout << "Encuentras una fuente mágica que te cura. Tu vida aumenta en 15 puntos." << endl;
+            vida += 15;
+            cout << "Vida actual: " << vida << endl;
+            break;
+
+        case 2:
+            cout << "Te aventuras en el camino cubierto de niebla densa. La niebla dificulta la visión." << endl;
+            cout << "De repente, te encuentras con una criatura misteriosa. ¿Qué harás?" << endl;
+            cout << "1. Tratar de comunicarte con la criatura" << endl;
+            cout << "2. Atacar a la criatura sin dudar" << endl;
+            cout << "3. Intentar retroceder y evitar la criatura" << endl;
+
+            int decisionCriatura;
+            cout << "Elige una opción (1-3): ";
+            cin >> decisionCriatura;
+
+            switch (decisionCriatura) {
+                case 1:
+                    cout << "Logras comunicarte con la criatura. Resulta ser amigable y te ofrece ayuda." << endl;
+                    cout << "Obtienes una poción de resistencia. Aumenta tu defensa en futuras batallas." << endl;
+                    // Puedes agregar más eventos aquí
+                    break;
+                case 2:
+                    cout << "Atacas a la criatura, pero resulta ser pacífica. Pierdes 10 puntos de vida por tu acción impulsiva." << endl;
+                    vida -= 10;
+                    cout << "Vida actual: " << vida << endl;
+                    break;
+                case 3:
+                    cout << "Intentas retroceder, pero la criatura te sigue curiosa. No ocurre nada más por ahora." << endl;
+                    break;
+                default:
+                    cout << "Elección no válida. La criatura te observa con cautela." << endl;
+            }
+            break;
+
+        case 3:
+            cout << "Optas por el atajo a través de la espesura. El camino es arduo y peligroso." << endl;
+            cout << "Encuentras un antiguo artefacto mágico. ¿Lo investigarás?" << endl;
+            cout << "1. Sí, investigar el artefacto" << endl;
+            cout << "2. No, seguir adelante sin tocarlo" << endl;
+
+            int decisionArtefacto;
+            cout << "Elige una opción (1-2): ";
+            cin >> decisionArtefacto;
+
+            switch (decisionArtefacto) {
+                case 1:
+                    cout << "Investigas el artefacto y obtienes conocimientos mágicos. Tu sabiduría aumenta en 10 puntos." << endl;
+                    // Puedes agregar más eventos aquí
+                    break;
+                case 2:
+                    cout << "Decides no tocar el artefacto y continúas tu camino con precaución." << endl;
+                    // Puedes agregar más eventos aquí
+                    break;
+                default:
+                    cout << "Elección no válida. El artefacto emite un zumbido inquietante." << endl;
+            }
+  
+             break;
+ 
+        default:
+            cout << "Elección no válida. Te quedas en el borde del bosque." << endl;
+            break;
+    }
+ }
+void historiaEnfrentamientoDragon(int &vida) {
+    cout << "Te encuentras con el poderoso dragón Thord que custodia la entrada al castillo." << endl;
+    cout << "¿Qué hara nuestro Heroe?" << endl;
+    cout << "1. Luchar con honor hasta el final" << endl;
+    cout << "2. Huir del lugar y buscar otra ruta fácil" << endl;
+    cout << "3. Buscar ayuda para derrotar al dragón" << endl;
+
+    int decision3;
+    cout << "Elige una opción (1-3): ";
+    cin >> decision3;
+
+    // Agrega eventos según la elección del jugador
+    switch (decision3) {
+        case 1:
+            cout << "Te enfrentas al dragón con valentía. ¡Es una batalla épica!" << endl;
+            // Puedes agregar más eventos aquí
+            break;
+        case 2:
+            cout << "Decides huir del lugar. El dragón te persigue, pero logras escapar por poco." << endl;
+            vida -= 80;
+            cout << "Vida actual: " << vida << endl;
+            break;
+        case 3:
+            cout << "Buscas ayuda y encuentras a un mago poderoso dispuesto a ayudarte en la batalla contra el dragón." << endl;
+            cout << "El mago te ofrece aprender un hechizo poderoso para la batalla." << endl;
+            cout << "1. Aprender el hechizo de fuego" << endl;
+            cout << "2. Aprender el hechizo de congelación" << endl;
+            cout << "3. Rechazar la oferta del mago" << endl;
+
+            int decisionMago;
+            cout << "Elige una opción (1-3): ";
+            cin >> decisionMago;
+
+            switch (decisionMago) {
+                case 1:
+                    cout << "Has aprendido el hechizo de fuego. ¡Listo para enfrentar al dragón!" << endl;
+                    // Puedes agregar más eventos aquí
+                    break;
+                case 2:
+                    cout << "Has aprendido el hechizo de congelación. ¡Listo para enfrentar al dragón!" << endl;
+                    // Puedes agregar más eventos aquí
+                    break;
+                case 3:
+                    cout << "Rechazas la oferta del mago. Te enfrentarás al dragón sin ayuda mágica adicional." << endl;
+                    // Puedes agregar más eventos aquí
+                    break;
+                default:
+                    cout << "Elección no válida. Rechazas la oferta del mago." << endl;
+                    // Puedes agregar más eventos aquí
+            }
+            break;
+
+        default:
+            cout << "Elección no válida. Volviendo al menú principal." << endl;
+            return;
+    }
+
+    // Continuación de la historia
+    cout << "Cuando llegas a la celda de la princesa, descubres que está encerrada por un rompecabezas mágico." << endl;
+    cout << "Debes resolver el rompecabezas para liberarla." << endl;
+    cout << "1. Intentar resolver el rompecabezas" << endl;
+    cout << "2. Pedir ayuda a la princesa" << endl;
+    cout << "3. Buscar una llave mágica en la habitación" << endl;
+
+    int decisionRompecabezas;
+    cout << "Elige una opción (1-3): ";
+    cin >> decisionRompecabezas;
+
+    switch (decisionRompecabezas) {
+        case 1:
+            // Agrega la lógica para resolver el rompecabezas aquí
+            cout << "Intentas resolver el rompecabezas. ¡Es más difícil de lo que parece!" << endl;
+            // Puedes agregar más eventos aquí
+            break;
+        case 2:
+            cout << "La princesa te da pistas y juntos resuelven el rompecabezas. ¡Princesa liberada!" << endl;
+            break;
+        case 3:
+            cout << "Encuentras una llave mágica escondida en la habitación. Abres la celda y liberas a la princesa." << endl;
+            break;
+        default:
+            cout << "Elección no válida. El rompecabezas sigue sin resolverse." << endl;
+            // Agrega la lógica para resolver el rompecabezas aquí
+    }
+}
+
+void rescatarPrincesa() {
+    cout << "Después de derrotar al dragón, llegas a la celda donde la princesa Fanny está prisionera." << endl;
+    cout << "Ella te mira con gratitud y te agradece por rescatarla. Tu misión está completa." << endl;
+    cout << "¡Felicidades, valiente caballero! Has completado tu aventura... O no?" << endl;
+}
+void historiaDesafioFinal() {
+    cout << "Después de rescatar a la princesa, te enfrentas al último desafío: el malvado hechicero oscuro." << endl;
+    cout << "El hechicero desata sus poderes oscuros. ¿Cómo responderás?" << endl;
+    cout << "1. Utilizar la espada de la verdad para contrarrestar sus hechizos" << endl;
+    cout << "2. Invocar la magia del dragón que derrotaste previamente" << endl;
+    cout << "3. Buscar en tu mochila y usar un objeto misterioso encontrado en la fosa" << endl;
+
+    int decisionDesafioFinal;
+    cout << "Elige una opción (1-3): ";
+    cin >> decisionDesafioFinal;
+
+    switch (decisionDesafioFinal) {
+        case 1:
+            cout << "Usas la espada de la verdad para contrarrestar los hechizos del hechicero. Es una batalla intensa, pero prevaleces." << endl;
+            cout << "¡Has vencido al hechicero oscuro y completado tu misión con éxito!" << endl;
+            break;
+        case 2:
+            cout << "Invocas la magia del dragón para enfrentarte al hechicero. La batalla es feroz, pero logras vencer al malvado hechicero." << endl;
+            cout << "¡La tierra está a salvo gracias a tu valentía!" << endl;
+            break;
+        case 3:
+            cout << "Utilizas el objeto misterioso encontrado en la fosa. Desata un poder sorprendente que debilita al hechicero." << endl;
+            cout << "Aprovechas la oportunidad para derrotar al hechicero oscuro y salvar el reino." << endl;
+            break;
+        default:
+            cout << "Elección no válida. El hechicero oscuro aprovecha la confusión y lanza un hechizo poderoso." << endl;
+            cout << "Pierdes algunos puntos de vida en la batalla final." << endl;
+    }
+
+    // Aquí estaba el bloque final de la historia, ahora dentro de la función
+    cout << "Después de derrotar al malvado hechicero oscuro y al dragon Thord" << endl;
+    cout << "Por fin están a salvo en el castillo la princesa Fanny y tú gran Heroe" << endl;
+    cout << "El reino celebra con una banquete y musica tu gran logro al rescatar a la princesa y decides casarte con la bella princessa" << endl;
+    cout << "Y así vivieron felices para siempre" << endl;
+
+    // Mensaje de fin del juego
+    cout << "**************************************************" << endl;
+    cout << "*                                                *" << endl;
+    cout << "*                   FIN DEL                      *" << endl;
+    cout << "*                    JUEGO                       *" << endl;
+    cout << "*                                                *" << endl;
+    cout << "**************************************************" << endl;
+}
